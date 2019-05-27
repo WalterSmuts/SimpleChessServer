@@ -2,5 +2,6 @@
     <info organisation="ws" module="chess.server"/>
     <dependencies>
         <dependency org="com.google.inject" name="guice" rev="4.0"/>
+        <dependency org="org.projectlombok" name="lombok" rev="1.18.8"/>
     </dependencies>
 </ivy-module>
