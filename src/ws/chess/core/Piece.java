@@ -13,7 +13,7 @@ public class Piece {
     private int y;
     private int X;
 
-    public List<Move> getPossibleMoves() {
+    public List<Move> getMovePattern() {
         return null;
     }
 
