@@ -61,8 +61,8 @@ public class Board {
     }
 
     static int stepTowards(int a, int b) {
+        if (a == b) return a;
         a += (a > b) ? -1 : 1;
-        if (a == b) a--;
         return a;
     }
 
@@ -75,6 +75,11 @@ public class Board {
             newPieces.add(newPiece);
             newBoard[newPiece.getX()][newPiece.getY()] = newPiece;
         });
+        newPieces.remove(newBoard[move.getDestination().getX()][move.getDestination().getY()]);
+        newPieces.remove(move.getOriginal());
+        newPieces.add(move.getDestination());
+        newBoard[move.getDestination().getX()][move.getDestination().getY()] = move.getDestination();
+        newBoard[move.getOriginal().getX()][move.getOriginal().getY()] = null;
         return new Board(newPieces, newBoard, newNext);
     }
 
@@ -89,7 +94,7 @@ public class Board {
     }
 
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder(next.equals(WHITE) ? "White's Turn\n" : "Blacks Turn\n");
         for (int i = 0; i < 8 ; i++) {
             for (int j = 0; j < 8 ; j++) {
                 Piece piece = board[j][i];
