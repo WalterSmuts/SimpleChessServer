@@ -14,7 +14,8 @@ public class Board {
         return pieces.stream()
             .filter(piece -> piece.getColor().equals(color))
             .flatMap(piece -> piece.getMovePattern().stream())
-            .filter(this::isValidMove)
+            .filter(this::isValidDestination)
+            .filter(this::hasCleanPath)
             .collect(Collectors.toList());
     }
 
@@ -24,20 +25,14 @@ public class Board {
             .collect(Collectors.toList());
     }
 
-    boolean isValidMove(Move move) {
-        int x = move.getDestination().getX();
-        int y = move.getDestination().getY();
-        Piece destinationSquare = board[x][y];
-        if (!(destinationSquare== null) &&
-            destinationSquare.getColor().equals(move.getOriginal().getColor())) {
-            return false;
-        }
-        if (move.getOriginal().getType().equals(Piece.Type.KNIGHT)) return true;
-        return hasCleanPath(move);
+    boolean isValidDestination(Move move) {
+        Piece destination = board[move.getDestination().getX()][move.getDestination().getY()];
+        return (destination == null) || !destination.getColor().equals(move.getOriginal().getColor());
     }
 
     boolean hasCleanPath(Move move) {
         // There has to be a simpler way to check this!!!
+        if (move.getOriginal().getType().equals(Piece.Type.KNIGHT)) return true;
         int ax = move.getOriginal().getX();
         int ay = move.getOriginal().getY();
         int bx = move.getDestination().getX();
