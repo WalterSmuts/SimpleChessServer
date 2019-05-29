@@ -1,10 +1,14 @@
 package ws.chess.core;
 
+import lombok.AllArgsConstructor;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static ws.chess.core.Piece.Color;
 
+@AllArgsConstructor
 public class Board {
     List<Piece> pieces;
     Piece[][] board;
@@ -58,9 +62,15 @@ public class Board {
     }
 
     public Board applyMove(Move move) {
-        // TODO need to deep copy state!!!
-        // Will this be a problem?
-        return this;
+        Color newNext = next.equals(Color.BLACK) ? Color.WHITE : Color.BLACK;
+        List<Piece> newPieces = new ArrayList<>();
+        Piece[][] newBoard = new Piece[8][8];
+        pieces.forEach(piece -> {
+            Piece newPiece = new Piece(piece);
+            newPieces.add(newPiece);
+            newBoard[newPiece.getX()][newPiece.getY()] = newPiece;
+        });
+        return new Board(newPieces, newBoard, newNext);
     }
 
     boolean inCheck(Color color) {

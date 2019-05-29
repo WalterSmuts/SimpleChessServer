@@ -11,11 +11,19 @@ public class Piece {
     private Color color;
     private Type type;
     private int y;
-    private int X;
+    private int x;
+
+    public Piece(Piece old) {
+        this.color = old.getColor();
+        this.type = old.getType();
+        this.x = old.getX();
+        this.y = old.getY();
+    }
 
     public List<Move> getMovePattern() {
         return null;
     }
+
 
     enum Type {
         KING,
