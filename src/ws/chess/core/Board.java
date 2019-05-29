@@ -23,7 +23,7 @@ public class Board {
             .collect(Collectors.toList());
     }
 
-    List<Move> getAvailableMoves() {
+    public List<Move> getAvailableMoves() {
         return getPossibleMoves(next).stream()
             .filter(move -> !applyMove(move).inCheck(next))
             .collect(Collectors.toList());
@@ -83,5 +83,21 @@ public class Board {
         return board[move.getDestination().getX()][move.getDestination().getY()]
             .getType()
             .equals(Piece.Type.KING);
+    }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 8 ; i++) {
+            for (int j = 0; j < 8 ; j++) {
+                Piece piece = board[j][i];
+                if (piece == null) {
+                    sb.append("X");
+                } else {
+                    sb.append(piece.toString());
+                }
+            }
+            sb.append("\n");
+        }
+        return sb.toString();
     }
 }
