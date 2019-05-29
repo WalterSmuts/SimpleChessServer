@@ -13,7 +13,7 @@ public class Pawn extends Piece {
         super(color, x, y);
     }
 
-    public List<Move> getMovePattern() {
+    public List<Move> getUniqueMovePattern() {
         Piece destination = this.clone();
         destination.setY(this.getColor().equals(WHITE) ? destination.getY() + 1 : destination.getY() - 1);
 

@@ -11,7 +11,7 @@ public class Bishop extends Piece {
         super(color, x, y);
     }
 
-    public List<Move> getMovePattern() {
+    public List<Move> getUniqueMovePattern() {
         return new ArrayList<>();
     }
 

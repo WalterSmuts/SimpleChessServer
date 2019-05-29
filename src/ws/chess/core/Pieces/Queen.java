@@ -11,7 +11,7 @@ public class Queen extends Piece {
         super(color, x, y);
     }
 
-    public List<Move> getMovePattern() {
+    List<Move> getUniqueMovePattern() {
         return new ArrayList<>();
     }
 
