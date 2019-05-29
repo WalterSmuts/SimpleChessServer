@@ -10,11 +10,17 @@ public class Board {
     Piece[][] board;
     Color next;
 
-    List<Move> getPossibleMoves() {
+    List<Move> getPossibleMoves(Color color) {
         return pieces.stream()
-            .filter(piece -> piece.getColor().equals(next))
+            .filter(piece -> piece.getColor().equals(color))
             .flatMap(piece -> piece.getMovePattern().stream())
             .filter(this::isValidMove)
+            .collect(Collectors.toList());
+    }
+
+    List<Move> getAvailableMoves() {
+        return getPossibleMoves(next).stream()
+            .filter(move -> !applyMove(move).inCheck(next))
             .collect(Collectors.toList());
     }
 
@@ -26,7 +32,6 @@ public class Board {
             destinationSquare.getColor().equals(move.getOriginal().getColor())) {
             return false;
         }
-        if (causesCheck(move)) return false;
         if (move.getOriginal().getType().equals(Piece.Type.KNIGHT)) return true;
         return hasCleanPath(move);
     }
@@ -57,28 +62,21 @@ public class Board {
         return a;
     }
 
-    boolean causesCheck(Move move) {
-        Board nextBoard = applyMove(move);
-        if (next.equals(Color.BLACK)) {
-            return nextBoard.whiteInCheck();
-        } else {
-            return nextBoard.blackInCheck();
-        }
-    }
-
     public Board applyMove(Move move) {
         // TODO need to deep copy state!!!
         // Will this be a problem?
         return this;
     }
 
-    boolean whiteInCheck() {
-        // TODO
-        return false;
+    boolean inCheck(Color color) {
+        return getPossibleMoves(color.equals(Color.BLACK) ? Color.WHITE : Color.BLACK)
+            .stream()
+            .anyMatch(this::consumesKing);
     }
 
-    boolean blackInCheck() {
-        // TODO
-        return false;
+    boolean consumesKing(Move move) {
+        return board[move.getDestination().getX()][move.getDestination().getY()]
+            .getType()
+            .equals(Piece.Type.KING);
     }
 }
