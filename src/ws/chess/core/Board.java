@@ -1,12 +1,17 @@
 package ws.chess.core;
 
 import lombok.AllArgsConstructor;
+import ws.chess.core.Pieces.King;
+import ws.chess.core.Pieces.Knight;
+import ws.chess.core.Pieces.Piece;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static ws.chess.core.Piece.Color;
+import static ws.chess.core.Pieces.Piece.Color;
+import static ws.chess.core.Pieces.Piece.Color.BLACK;
+import static ws.chess.core.Pieces.Piece.Color.WHITE;
 
 @AllArgsConstructor
 public class Board {
@@ -36,7 +41,7 @@ public class Board {
 
     boolean hasCleanPath(Move move) {
         // There has to be a simpler way to check this!!!
-        if (move.getOriginal().getType().equals(Piece.Type.KNIGHT)) return true;
+        if (move.getOriginal() instanceof Knight) return true;
         int ax = move.getOriginal().getX();
         int ay = move.getOriginal().getY();
         int bx = move.getDestination().getX();
@@ -62,11 +67,11 @@ public class Board {
     }
 
     public Board applyMove(Move move) {
-        Color newNext = next.equals(Color.BLACK) ? Color.WHITE : Color.BLACK;
+        Color newNext = next.equals(BLACK) ? WHITE : BLACK;
         List<Piece> newPieces = new ArrayList<>();
         Piece[][] newBoard = new Piece[8][8];
         pieces.forEach(piece -> {
-            Piece newPiece = new Piece(piece);
+            Piece newPiece = piece.clone();
             newPieces.add(newPiece);
             newBoard[newPiece.getX()][newPiece.getY()] = newPiece;
         });
@@ -74,15 +79,13 @@ public class Board {
     }
 
     boolean inCheck(Color color) {
-        return getPossibleMoves(color.equals(Color.BLACK) ? Color.WHITE : Color.BLACK)
+        return getPossibleMoves(color.equals(BLACK) ? WHITE : BLACK)
             .stream()
             .anyMatch(this::consumesKing);
     }
 
     boolean consumesKing(Move move) {
-        return board[move.getDestination().getX()][move.getDestination().getY()]
-            .getType()
-            .equals(Piece.Type.KING);
+        return board[move.getDestination().getX()][move.getDestination().getY()] instanceof King;
     }
 
     public String toString() {
