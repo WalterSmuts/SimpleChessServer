@@ -47,15 +47,13 @@ public class Board {
         int bx = move.getDestination().getX();
         int by = move.getDestination().getY();
 
-        ax = stepTowards(ax, bx);
-        ay = stepTowards(ay, by);
         bx = stepTowards(bx, ax);
         by = stepTowards(by, ay);
 
-        while (ax != bx && ay != by) {
-            if (!(board[ax][ay] == null)) return false;
+        while (ax != bx || ay != by) {
             ax = stepTowards(ax, bx);
             ay = stepTowards(ay, by);
+            if (!(board[ax][ay] == null)) return false;
         }
         return true;
     }
