@@ -29,36 +29,10 @@ public abstract class Piece {
     List<Move> getLinearPattern() {
         List<Move> moves = new ArrayList<>();
         for (int i = 1; i < 8; i++) {
-            Piece piece1 = this.clone();
-            Piece piece2 = this.clone();
-            Piece piece3 = this.clone();
-            Piece piece4 = this.clone();
-
-            piece1.setX(this.getX() + i);
-            piece2.setX(this.getX() - i);
-            piece3.setY(this.getY() + i);
-            piece4.setY(this.getY() - i);
-
-            moves.add(Move.builder()
-                .original(this)
-                .destination(piece1)
-                .build()
-            );
-            moves.add(Move.builder()
-                .original(this)
-                .destination(piece2)
-                .build()
-            );
-            moves.add(Move.builder()
-                .original(this)
-                .destination(piece3)
-                .build()
-            );
-            moves.add(Move.builder()
-                .original(this)
-                .destination(piece4)
-                .build()
-            );
+            moves.add(move(+i, 0));
+            moves.add(move(-i, 0));
+            moves.add(move(0, +i));
+            moves.add(move(0, -i));
         }
         return moves;
     }
@@ -66,41 +40,10 @@ public abstract class Piece {
     List<Move> getDiagonalPattern() {
         List<Move> moves = new ArrayList<>();
         for (int i = 1; i < 8; i++) {
-            Piece piece1 = this.clone();
-            Piece piece2 = this.clone();
-            Piece piece3 = this.clone();
-            Piece piece4 = this.clone();
-
-            piece1.setX(this.getX() + i);
-            piece2.setX(this.getX() - i);
-            piece3.setX(this.getX() + i);
-            piece4.setX(this.getX() - i);
-
-            piece1.setY(this.getY() + i);
-            piece2.setY(this.getY() + i);
-            piece3.setY(this.getY() - i);
-            piece4.setY(this.getY() - i);
-
-            moves.add(Move.builder()
-                .original(this)
-                .destination(piece1)
-                .build()
-            );
-            moves.add(Move.builder()
-                .original(this)
-                .destination(piece2)
-                .build()
-            );
-            moves.add(Move.builder()
-                .original(this)
-                .destination(piece3)
-                .build()
-            );
-            moves.add(Move.builder()
-                .original(this)
-                .destination(piece4)
-                .build()
-            );
+            moves.add(move(+i, +i));
+            moves.add(move(-i, -i));
+            moves.add(move(+i, -i));
+            moves.add(move(-i, +i));
         }
         return moves;
     }
@@ -108,6 +51,16 @@ public abstract class Piece {
     private boolean onBoard(Move move) {
         return (move.getDestination().getY() < 8) && (move.getDestination().getY() >= 0)
             && (move.getDestination().getX() < 8) && (move.getDestination().getX() >= 0);
+    }
+
+    protected Move move(int x, int y) {
+        Piece clone = this.clone();
+        clone.setX(this.getX() + x);
+        clone.setY(this.getY() + y);
+        return Move.builder()
+            .original(this)
+            .destination(clone)
+            .build();
     }
 
     public abstract Piece clone();

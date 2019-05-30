@@ -12,7 +12,16 @@ public class Knight extends Piece {
     }
 
     public List<Move> getUniqueMovePattern() {
-        return new ArrayList<>();
+        List<Move> moves = new ArrayList<>();
+        moves.add(move(+2, +1));
+        moves.add(move(+2, -1));
+        moves.add(move(+1, +2));
+        moves.add(move(+1, -2));
+        moves.add(move(-2, +1));
+        moves.add(move(-2, -1));
+        moves.add(move(-1, +2));
+        moves.add(move(-1, -2));
+        return moves;
     }
 
     String getSymbol() {

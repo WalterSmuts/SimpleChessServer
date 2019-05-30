@@ -12,6 +12,16 @@ public class King extends Piece {
     }
 
     public List<Move> getUniqueMovePattern() {
+        List<Move> moves = new ArrayList<>();
+        moves.add(move(1, 1));
+        moves.add(move(1, 0));
+        moves.add(move(1, -1));
+        moves.add(move(0, 1));
+        moves.add(move(0, 0));
+        moves.add(move(0, -1));
+        moves.add(move(-1, 1));
+        moves.add(move(-1, 0));
+        moves.add(move(-1, -1));
         return new ArrayList<>();
     }
 
