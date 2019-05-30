@@ -2,7 +2,6 @@ package ws.chess.core.Pieces;
 
 import ws.chess.core.Move;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Bishop extends Piece {
@@ -12,7 +11,7 @@ public class Bishop extends Piece {
     }
 
     public List<Move> getUniqueMovePattern() {
-        return new ArrayList<>();
+        return getDiagonalPattern();
     }
 
     String getSymbol() {

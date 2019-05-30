@@ -2,7 +2,6 @@ package ws.chess.core.Pieces;
 
 import ws.chess.core.Move;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Queen extends Piece {
@@ -12,7 +11,9 @@ public class Queen extends Piece {
     }
 
     List<Move> getUniqueMovePattern() {
-        return new ArrayList<>();
+        List<Move> moves = getDiagonalPattern();
+        moves.addAll(getLinearPattern());
+        return moves;
     }
 
     String getSymbol() {
