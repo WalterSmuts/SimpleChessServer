@@ -29,7 +29,11 @@ public class Pawn extends Piece {
         Pawn attack1 = (Pawn)this.clone();
         Pawn attack2 = (Pawn)this.clone();
         attack1.setAttackPawn(true);
+        attack1.setX(attack1.getX() + 1);
+        attack1.setY(attack1.getY() + dir);
         attack2.setAttackPawn(true);
+        attack2.setX(attack2.getX() - 1);
+        attack2.setY(attack2.getY() + dir);
 
         moves.add(Move.builder()
             .original(this)
