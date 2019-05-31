@@ -11,7 +11,15 @@ public class Move {
     private Piece destination;
 
     public String toString() {
-        return String.format("%s %d,%d goes to %d,%d%n",
-            original, original.getX(), original.getY(), destination.getX(), destination.getY());
+        return String.format("%s: %s%d moves to %s%d",
+            original.getClass().getSimpleName(),
+            getLetter(original.getX()),
+            original.getY() + 1,
+            getLetter(destination.getX()),
+            destination.getY() + 1);
+    }
+
+    char getLetter(int number) {
+        return (char)(number + 65);
     }
 }
