@@ -22,7 +22,7 @@ public class King extends Piece {
         moves.add(move(-1, 1));
         moves.add(move(-1, 0));
         moves.add(move(-1, -1));
-        return new ArrayList<>();
+        return moves;
     }
 
     public String getSymbol() {
