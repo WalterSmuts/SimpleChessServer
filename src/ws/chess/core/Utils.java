@@ -1,12 +1,12 @@
 package ws.chess.core;
 
-import ws.chess.core.Pieces.*;
+import ws.chess.core.pieces.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static ws.chess.core.Pieces.Piece.Color.BLACK;
-import static ws.chess.core.Pieces.Piece.Color.WHITE;
+import static ws.chess.core.pieces.Piece.Color.BLACK;
+import static ws.chess.core.pieces.Piece.Color.WHITE;
 
 public class Utils {
     public static Board getStartingBoard() {

@@ -1,4 +1,4 @@
-package ws.chess.core.Pieces;
+package ws.chess.core.pieces;
 
 import ws.chess.core.Move;
 

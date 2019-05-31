@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import ws.chess.core.Board;
 import ws.chess.server.player.Player;
 
-import static ws.chess.core.Pieces.Piece.Color.BLACK;
-import static ws.chess.core.Pieces.Piece.Color.WHITE;
+import static ws.chess.core.pieces.Piece.Color.BLACK;
+import static ws.chess.core.pieces.Piece.Color.WHITE;
 
 @AllArgsConstructor
 public class SimpleChessServer {

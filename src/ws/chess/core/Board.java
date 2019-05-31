@@ -1,18 +1,18 @@
 package ws.chess.core;
 
 import lombok.AllArgsConstructor;
-import ws.chess.core.Pieces.King;
-import ws.chess.core.Pieces.Knight;
-import ws.chess.core.Pieces.Pawn;
-import ws.chess.core.Pieces.Piece;
+import ws.chess.core.pieces.King;
+import ws.chess.core.pieces.Knight;
+import ws.chess.core.pieces.Pawn;
+import ws.chess.core.pieces.Piece;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static ws.chess.core.Pieces.Piece.Color;
-import static ws.chess.core.Pieces.Piece.Color.BLACK;
-import static ws.chess.core.Pieces.Piece.Color.WHITE;
+import static ws.chess.core.pieces.Piece.Color;
+import static ws.chess.core.pieces.Piece.Color.BLACK;
+import static ws.chess.core.pieces.Piece.Color.WHITE;
 
 @AllArgsConstructor
 public class Board {

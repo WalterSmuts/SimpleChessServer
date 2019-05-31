@@ -1,4 +1,4 @@
-package ws.chess.core.Pieces;
+package ws.chess.core.pieces;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,7 +7,7 @@ import ws.chess.core.Move;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ws.chess.core.Pieces.Piece.Color.WHITE;
+import static ws.chess.core.pieces.Piece.Color.WHITE;
 
 public class Pawn extends Piece {
     @Getter @Setter

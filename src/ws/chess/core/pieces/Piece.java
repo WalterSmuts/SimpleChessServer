@@ -1,4 +1,4 @@
-package ws.chess.core.Pieces;
+package ws.chess.core.pieces;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static ws.chess.core.Pieces.Piece.Color.WHITE;
+import static ws.chess.core.pieces.Piece.Color.WHITE;
 
 @Data
 @AllArgsConstructor
