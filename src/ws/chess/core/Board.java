@@ -3,6 +3,7 @@ package ws.chess.core;
 import lombok.AllArgsConstructor;
 import ws.chess.core.Pieces.King;
 import ws.chess.core.Pieces.Knight;
+import ws.chess.core.Pieces.Pawn;
 import ws.chess.core.Pieces.Piece;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ public class Board {
             .flatMap(piece -> piece.getMovePattern().stream())
             .filter(this::isValidDestination)
             .filter(this::hasCleanPath)
+            .filter(this::pawnAttackFilter)
             .collect(Collectors.toList());
     }
 
@@ -32,6 +34,13 @@ public class Board {
         return getPossibleMoves(next).stream()
             .filter(move -> !applyMove(move).inCheck(next))
             .collect(Collectors.toList());
+    }
+
+    boolean pawnAttackFilter(Move move) {
+        if (!(move.getOriginal() instanceof Pawn)) return true;
+        Pawn pawn = (Pawn)move.getDestination();
+        Piece destination = board[move.getDestination().getX()][move.getDestination().getY()];
+        return  (pawn.isAttackPawn() ^ destination == null);
     }
 
     boolean isValidDestination(Move move) {
