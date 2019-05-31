@@ -1,23 +1,15 @@
-package ws.chess;
+package ws.chess.core;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Provides;
-import ws.chess.core.Board;
 import ws.chess.core.Pieces.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static ws.chess.core.Pieces.Piece.Color.WHITE;
 import static ws.chess.core.Pieces.Piece.Color.BLACK;
+import static ws.chess.core.Pieces.Piece.Color.WHITE;
 
-public class ServerModule extends AbstractModule {
-    protected void configure() {
-
-    }
-
-    @Provides
-    Board getStartBoard() {
+public class Utils {
+    public static Board getStartingBoard() {
         List<Piece> pieces = new ArrayList<>();
         Piece[][] board = new Piece[8][8];
 

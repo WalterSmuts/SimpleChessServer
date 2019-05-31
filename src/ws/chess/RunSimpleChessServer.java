@@ -1,15 +1,17 @@
 package ws.chess;
 
-import com.google.inject.Injector;
+import ws.chess.core.Utils;
 import ws.chess.server.SimpleChessServer;
-
-import static com.google.inject.Guice.createInjector;
+import ws.chess.server.player.RandomPlayer;
 
 public class RunSimpleChessServer {
 
     public static void main(String[] args) {
-        Injector injector =  createInjector(new ServerModule());
-        SimpleChessServer server = injector.getInstance(SimpleChessServer.class);
+        SimpleChessServer server = new SimpleChessServer(
+            Utils.getStartingBoard(),
+            new RandomPlayer(),
+            new RandomPlayer()
+        );
         server.run();
     }
 }

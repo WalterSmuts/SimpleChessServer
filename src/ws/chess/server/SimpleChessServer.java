@@ -1,29 +1,27 @@
 package ws.chess.server;
 
+import lombok.AllArgsConstructor;
 import ws.chess.core.Board;
-import ws.chess.core.Move;
+import ws.chess.server.player.Player;
 
-import javax.inject.Inject;
-import java.io.IOException;
-import java.util.List;
-import java.util.Random;
 
+import static ws.chess.core.Pieces.Piece.Color.BLACK;
+import static ws.chess.core.Pieces.Piece.Color.WHITE;
+
+@AllArgsConstructor
 public class SimpleChessServer {
-    @Inject
     private Board board;
+    private Player white;
+    private Player black;
 
     public void run() {
-        Random random = new Random();
-        while (true) {
+        while (board.getAvailableMoves().size() != 0) {
             System.out.println(board.toString());
-            try {
-                System.in.read();
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            List<Move> moves = board.getAvailableMoves();
-            board = board.applyMove(moves.get(random.nextInt(moves.size())));
+            board = board.applyMove(board.getNext().equals(WHITE) ?
+                white.getMove(board) : black.getMove(board));
         }
+        System.out.println(board.toString());
+        System.out.println(String.format("%s wins!!!", board.getNext().equals(WHITE) ? BLACK : WHITE));
     }
 
 }

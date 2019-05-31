@@ -106,4 +106,8 @@ public class Board {
         }
         return sb.toString();
     }
+
+    public Color getNext() {
+        return next;
+    }
 }
