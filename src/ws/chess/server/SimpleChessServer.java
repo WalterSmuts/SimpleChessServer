@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import ws.chess.core.Board;
 import ws.chess.server.player.Player;
 
-
 import static ws.chess.core.Pieces.Piece.Color.BLACK;
 import static ws.chess.core.Pieces.Piece.Color.WHITE;
 
@@ -17,6 +16,7 @@ public class SimpleChessServer {
     public void run() {
         while (board.getAvailableMoves().size() != 0) {
             System.out.println(board.toString());
+            System.out.println();
             board = board.applyMove(board.getNext().equals(WHITE) ?
                 white.getMove(board) : black.getMove(board));
         }

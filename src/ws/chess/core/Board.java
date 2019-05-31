@@ -92,18 +92,18 @@ public class Board {
     }
 
     public String toString() {
-        StringBuilder sb = new StringBuilder(next.equals(WHITE) ? "White's Turn\n" : "Blacks Turn\n");
-        for (int i = 0; i < 8 ; i++) {
-            for (int j = 0; j < 8 ; j++) {
-                Piece piece = board[j][i];
-                if (piece == null) {
-                    sb.append("X");
-                } else {
-                    sb.append(piece.toString());
-                }
-            }
-            sb.append("\n");
+        StringBuilder sb = new StringBuilder(String.format("            %s's turn...%n", next));
+        sb.append("    A   B   C   D   E   F   G   H   \n");
+        sb.append("  ---------------------------------  \n");
+        for (int i = 8; i >= 1; i--) {
+           sb.append(String.format("%d |", i));
+           for (int j = 1; j <= 8; j++) {
+               sb.append(String.format(" %s |", board[j-1][i-1] == null ? " " : board[j-1][i-1].toString()));
+           }
+           sb.append(String.format(" %d%n", i));
+           sb.append("  ---------------------------------  \n");
         }
+        sb.append("    A   B   C   D   E   F   G   H   ");
         return sb.toString();
     }
 
