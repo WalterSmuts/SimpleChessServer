@@ -9,7 +9,7 @@ A simple chess server intended to mediate interaction between chess bots.
 ## Instructions
 ```bash
 # Clone repository
-git clone https://github.com/WalterSmuts/SimpleChessServer.git
+git clone --recursive https://github.com/WalterSmuts/SimpleChessServer.git
 # Change into repository root folder
 cd SimpleChessServer
 # Run server (pulls dependecies; compiles code; creates jar; runs server)

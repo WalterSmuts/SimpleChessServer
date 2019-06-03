@@ -1,0 +1,3 @@
+[submodule "SimpleChessCore"]
+	path = SimpleChessCore
+	url = https://github.com/WalterSmuts/SimpleChessCore.git

@@ -10,16 +10,26 @@
     <target name="clean">
         <delete dir="${build.dir}"/>
         <delete dir="${lib.dir}"/>
+        <ant dir="SimpleChessCore" target="clean"/>
     </target>
 
     <target name="resolve">
-        <ivy:retrieve/>
-        <ivy:cachepath pathid="lib.path"/>
+        <ivy:retrieve pattern="${lib.dir}/[artifact]-[type].[ext]"/>
     </target>
 
-    <target name="compile" depends="resolve">
+    <target name="core">
+        <ant dir="SimpleChessCore"/>
+        <copy file="SimpleChessCore/build/jar/SimpleChessCore.jar" todir="${lib.dir}"/>
+    </target>
+
+    <target name="compile" depends="resolve,core">
         <mkdir dir="${classes.dir}"/>
-        <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="lib.path"/>
+        <path id="build-classpath">
+            <fileset dir="lib">
+                <include name="*.jar"/>
+            </fileset>
+        </path>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="build-classpath" includeantruntime="false"/>
     </target>
 
     <target name="jar" depends="compile">
@@ -34,11 +44,7 @@
     </target>
 
     <target name="run" depends="jar">
-        <java jar="${jar.dir}/${ant.project.name}.jar" fork="true">
-            <classpath>
-                <path refid="lib.path"/>
-            </classpath>
-        </java>
+        <java jar="${jar.dir}/${ant.project.name}.jar" fork="true"/>
     </target>
 
     <target name="clean-build" depends="clean,jar"/>
